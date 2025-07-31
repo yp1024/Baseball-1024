@@ -12,10 +12,12 @@ def assert_illegal_argument(game, guessNumber):
     except TypeError:
         pass
 
-def test_exception_when_input_is_none(game):
+def test_exception_when_invalid_input(game):
     assert_illegal_argument(game, None)
     assert_illegal_argument(game, '12')
     assert_illegal_argument(game, '1234')
+    assert_illegal_argument(game, '12s')
+    assert_illegal_argument(game, '121')
 
 
 
