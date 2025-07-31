@@ -1,5 +1,6 @@
 import pytest
 from game import Game
+from game_result import GameResult
 
 @pytest.fixture()
 def game():
@@ -13,19 +14,11 @@ def assert_illegal_argument(game, guess_number):
 def test_exception_when_invalid_input(game, invalid_input):
     assert_illegal_argument(game, invalid_input)
 
-# def assert_illegal_argument(game, guess_number):
-#     try:
-#         game.guess(guess_number)
-#         pytest.fail()
-#     except TypeError:
-#         pass
-#
-# def test_exception_when_invalid_input(game):
-#     assert_illegal_argument(game, None)
-#     assert_illegal_argument(game, '12')
-#     assert_illegal_argument(game, '1234')
-#     assert_illegal_argument(game, '12s')
-#     assert_illegal_argument(game, '121')
+def test_return_solved_result_if_matched_number(game):
+    game.question = '123'
+    result: GameResult = game.guess('123')
 
-
-
+    assert result is not None
+    assert result.solved == True
+    assert result.strikes == 3
+    assert result.balls == 0
